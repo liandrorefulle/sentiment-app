@@ -25,4 +25,3 @@ A web app that analyzes whether a text input is positive, negative, or neutral u
    python app.py
 
 6. Open browser and go to http://127.0.0.1:5000
-```
