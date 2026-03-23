@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analyzer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a4a8a;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 28px;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 130px;
+            outline: none;
+            transition: border 0.3s;
+            font-family: inherit;
+        }
+
+        textarea:focus { border-color: #667eea; }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover { opacity: 0.9; }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f4f4ff;
+            border-left: 5px solid #667eea;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #4a4a8a;
+        }
+
+        .polarity {
+            margin-top: 6px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .original-text {
+            margin-top: 10px;
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🧠 Sentiment Analyzer</h1>
+        <p class="subtitle">Type anything and find out the sentiment</p>
+
+        <form action="/analyze" method="POST">
+            <textarea name="text" placeholder="Type something like 'I love this!' or 'This is terrible...'" required>{{ text or '' }}</textarea>
+            <button type="submit">Analyze →</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <div class="result-label">{{ result }}</div>
+            <div class="polarity">Polarity score: {{ polarity }}</div>
+            <div class="original-text">"{{ text }}"</div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
